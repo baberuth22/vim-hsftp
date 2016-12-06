@@ -80,7 +80,7 @@ function! H_UploadFile()
 
   if has_key(conf, 'host')
     let loc_path = fnameescape(conf['localpath'])
-    let action = printf('put %s %s', loc_path, conf['remotepath'])
+    let action = printf('put "%s" %s', loc_path, conf['remotepath'])
     let cmd = printf('expect -c "set timeout 5; spawn sftp -P %s %s@%s; expect \"*assword:\"; send %s\r; expect \"sftp>\"; send \"%s\r\"; expect -re \"100%\"; send \"exit\r\";"', conf['port'], conf['user'], conf['host'], conf['pass'], action)
 
     if conf['confirm_upload'] == 1
